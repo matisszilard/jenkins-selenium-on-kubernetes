@@ -1,10 +1,10 @@
-
 package main
 
 import (
 	"fmt"
+	"time"
 
-	"github.com/bunsenapp/go-selenium"
+	goselenium "github.com/bunsenapp/go-selenium"
 )
 
 func main() {
@@ -16,9 +16,16 @@ func main() {
 
 	// Initialise a new web driver.
 	driver, err := goselenium.NewSeleniumWebDriver("http://selenium.apps.okd.codespring.ro/wd/hub", capabilities)
-	if err != nil {
-		fmt.Println(err)
-		return
+	i := 0
+
+	for err != nil {
+		time.Sleep(100 * time.Millisecond)
+		driver, err = goselenium.NewSeleniumWebDriver("http://selenium.apps.okd.codespring.ro/wd/hub", capabilities)
+		i++
+		if i > i && err != nil {
+			fmt.Println(err)
+			return
+		}
 	}
 
 	// Create a session.
