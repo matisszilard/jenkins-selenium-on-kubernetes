@@ -3,17 +3,17 @@
 pipeline {
     agent none
     stages {
-        stage('Build') {
+        stage('Run tests in chrome') {
           agent {
             kubernetes {
-                            label 'selenium-chrome'
-                            defaultContainer 'builder'
-                            yamlFile 'test-env.yaml'
+              label 'selenium-chrome'
+              defaultContainer 'builder'
+              yamlFile 'test-env.yaml'
             } // kubernetes
           } // agent
           steps {
               script {
-                sh "go build -o run_test_cases && ./run_test_cases"
+                sh "./wait-for-grid.sh go build -o run_test_cases && ./run_test_cases"
               } // container
           } // steps
         } // stage(build)
