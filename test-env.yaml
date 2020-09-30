@@ -4,7 +4,7 @@ metadata:
 spec:
   containers:
   - name: builder
-    image: golang:1.14.6
+    image: mszg/golang-dev:1.15.2
     imagePullPolicy: Always
     env:
     - name: GOCACHE
